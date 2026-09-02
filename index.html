@@ -142,10 +142,10 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
  <!-- 2 -->
  <section class=meas style="border-top:none;padding-top:0;margin-top:34px">
   <div class=ctr>
-   <div class=ct><div class="v num" data-count="11000000" data-suffix="+">11M+</div><div class=k>job postings collected, and counting</div></div>
-   <div class=ct><div class="v num" data-count="15">15</div><div class=k>countries</div></div>
-   <div class=ct><div class="v num" data-count="10000" data-suffix="+">10,000+</div><div class=k>sources — job boards, company sites, public agencies</div></div>
-   <div class=ct><div class="v num" data-count="650000" data-suffix="+">650,000+</div><div class=k>new postings a day</div></div>
+   <div class=ct><div class="v num" data-key="postings" data-count="11000000" data-suffix="+">11M+</div><div class=k>job postings collected, and counting</div></div>
+   <div class=ct><div class="v num" data-key="markets" data-count="15">15</div><div class=k>countries</div></div>
+   <div class=ct><div class="v num" data-key="sources" data-count="10000" data-suffix="+">10,000+</div><div class=k>sources — job boards, company sites, public agencies</div></div>
+   <div class=ct><div class="v num" data-key="daily" data-count="650000" data-suffix="+">650,000+</div><div class=k>new postings a day</div></div>
   </div>
   <p class=tax><b>Not a survey. Not an annual report.</b> A continuous read of what employers post, rebuilt every
   week — <b>including the skills official classifications have not named yet</b>. The index and the taxonomy behind it
@@ -274,6 +274,27 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
     }
     requestAnimationFrame(step);
   });
+
+  // Il contatore si sincronizza con la raccolta: collection.json e' scritto dalla macchina
+  // su Hetzner, che pubblica SOGLIE col "+" e non le fa mai scendere. Se il file manca, e'
+  // malformato o incompleto, la pagina resta sui valori scritti nell'HTML — che sono veri,
+  // solo piu' vecchi. Un contatore fermo e' meglio di un contatore sbagliato.
+  fetch('collection.json', {cache: 'no-store'}).then(function(r){
+    return r.ok ? r.json() : null;
+  }).then(function(d){
+    if (!d) return;
+    var cells = {postings: d.postings, markets: d.markets, sources: d.sources, daily: d.daily};
+    for (var k in cells) {
+      var v = cells[k];
+      if (typeof v !== 'number' || !isFinite(v) || v <= 0) continue;   // campo assente o assurdo: si ignora
+      var el = document.querySelector('[data-key="' + k + '"]');
+      if (!el) continue;
+      var suffix = el.getAttribute('data-suffix') || '';
+      var shown = v >= 1e6 ? Math.round(v / 1e6) + 'M' : v.toLocaleString('en-US');
+      el.setAttribute('data-count', v);
+      el.textContent = shown + suffix;
+    }
+  }).catch(function(){ /* offline o file assente: restano i valori dell'HTML */ });
 })();
 </script>
 </body></html>
