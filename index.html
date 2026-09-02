@@ -43,7 +43,7 @@ nav a:hover{color:var(--ink);border-color:#b9b8b2}nav a.on{color:#fff;border-col
 .ctr{display:grid;grid-template-columns:repeat(4,1fr);margin:34px 0 0;background:var(--pan);border:1px solid var(--bd);border-radius:8px;overflow:hidden}
 .ct{padding:24px 24px 26px;border-right:1px solid var(--bd)}
 .ct:last-child{border-right:none}
-.ct .v{font:800 36px/1 Archivo,sans-serif;color:var(--ac);letter-spacing:-1.5px;font-variant-numeric:tabular-nums}
+.ct .v{font:800 36px/1 Archivo,sans-serif;color:var(--ac);letter-spacing:-1.5px;font-variant-numeric:tabular-nums;white-space:nowrap}.ct .v[data-key=postings]{font-size:29px;letter-spacing:-1.1px}
 .ct .k{font-size:12.5px;color:var(--mut);margin-top:9px;line-height:1.45}
 
 /* 3-5 · the three questions */
@@ -142,7 +142,7 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
  <!-- 2 -->
  <section class=meas style="border-top:none;padding-top:0;margin-top:34px">
   <div class=ctr>
-   <div class=ct><div class="v num" data-key="postings" data-count="11000000" data-suffix="+">11M+</div><div class=k>job postings collected, and counting</div></div>
+   <div class=ct><div class="v num" data-key="postings" data-count="11000000" data-suffix="+">11M+</div><div class=k title="Exact at each hourly sync with the collection; between syncs it runs on the measured rate.">job postings collected · running count</div></div>
    <div class=ct><div class="v num" data-key="markets" data-count="15">15</div><div class=k>countries</div></div>
    <div class=ct><div class="v num" data-key="sources" data-count="10000" data-suffix="+">10,000+</div><div class=k>sources — job boards, company sites, public agencies</div></div>
    <div class=ct><div class="v num" data-key="daily" data-count="650000" data-suffix="+">650,000+</div><div class=k>new postings a day</div></div>
@@ -273,6 +273,7 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
 
   function animate(){
     els.forEach(function(el){
+      if (tick && el.getAttribute('data-key') === 'postings') return;   // quella scorre gia'
       var target = parseInt(el.getAttribute('data-count'), 10);
       if (isNaN(target)) return;
       var suffix = el.getAttribute('data-suffix') || '';
@@ -290,12 +291,32 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
     });
   }
 
+  // Il contatore che scorre. NON inventa: parte dal valore ESATTO misurato dalla macchina
+  // e avanza col ritmo MISURATO, quindi e' una proiezione fra due sincronizzazioni — a ogni
+  // sync orario si riallinea al vero. Se i due ingredienti non ci sono, non scorre affatto.
+  var tick = null;
+  function runCounter(d){
+    var el = document.querySelector('[data-key="postings"]');
+    if (!el || !d) return false;
+    var base = d.postings_exact, rate = d.rate_per_sec, t0 = d.measured_at;
+    if (typeof base !== 'number' || typeof rate !== 'number' || typeof t0 !== 'number') return false;
+    if (!(base > 0) || !(rate > 0) || !isFinite(base) || !isFinite(rate)) return false;
+    el.removeAttribute('data-suffix');
+    function paint(){
+      var elapsed = Math.max(0, Date.now() / 1000 - t0);
+      el.textContent = Math.floor(base + rate * elapsed).toLocaleString('en-US');
+    }
+    paint();
+    if (!reduce) tick = setInterval(paint, 120);   // ~7,5 annunci/s: si muove di continuo
+    return true;
+  }
+
   var started = false;
   function go(){ if (!started) { started = true; animate(); } }
   setTimeout(go, 1500);                            // una fetch lenta non trattiene il contatore
   fetch('collection.json', {cache: 'no-store'})
     .then(function(r){ return r.ok ? r.json() : null; })
-    .then(apply)
+    .then(function(d){ apply(d); runCounter(d); return d; })
     .catch(function(){ /* offline o file assente: restano i valori dell'HTML */ })
     .then(go);
 })();
