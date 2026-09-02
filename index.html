@@ -250,51 +250,54 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
 </div>
 
 <script>
-// Count-up animation. Each element animates to the value in its own data-count attribute and finishes on the
-// exact text already in the HTML; any suffix comes from data-suffix, so the script never adds one on its own.
 (function(){
   var els = document.querySelectorAll('[data-count]');
   if (!els.length) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  els.forEach(function(el){
-    var target = parseInt(el.getAttribute('data-count'), 10);
-    if (isNaN(target)) return;
-    var suffix = el.getAttribute('data-suffix') || '';
-    var final = el.textContent;
-    function draw(n){
-      el.textContent = (target >= 1000000 ? Math.round(n/1000000) + 'M' : n.toLocaleString('en-US')) + suffix;
-    }
-    if (reduce){ el.textContent = final; return; }
-    var dur = 1200, t0 = null;
-    function step(ts){
-      if (t0 === null) t0 = ts;
-      var p = Math.min((ts - t0) / dur, 1);
-      draw(Math.floor(target * (1 - Math.pow(1 - p, 3))));
-      if (p < 1) requestAnimationFrame(step); else el.textContent = final;
-    }
-    requestAnimationFrame(step);
-  });
 
-  // Il contatore si sincronizza con la raccolta: collection.json e' scritto dalla macchina
-  // su Hetzner, che pubblica SOGLIE col "+" e non le fa mai scendere. Se il file manca, e'
-  // malformato o incompleto, la pagina resta sui valori scritti nell'HTML — che sono veri,
-  // solo piu' vecchi. Un contatore fermo e' meglio di un contatore sbagliato.
-  fetch('collection.json', {cache: 'no-store'}).then(function(r){
-    return r.ok ? r.json() : null;
-  }).then(function(d){
+  // Sincronizza PRIMA, anima DOPO. L'ordine non e' estetico: l'animazione termina
+  // riscrivendo il testo finale, quindi se partisse per prima cancellerebbe il valore
+  // appena sincronizzato (successo davvero, visto sul sito pubblicato).
+  function apply(d){
     if (!d) return;
-    var cells = {postings: d.postings, markets: d.markets, sources: d.sources, daily: d.daily};
-    for (var k in cells) {
-      var v = cells[k];
-      if (typeof v !== 'number' || !isFinite(v) || v <= 0) continue;   // campo assente o assurdo: si ignora
+    ['postings','markets','sources','daily'].forEach(function(k){
+      var v = d[k];
+      if (typeof v !== 'number' || !isFinite(v) || v <= 0) return;   // campo assente o assurdo: si ignora
       var el = document.querySelector('[data-key="' + k + '"]');
-      if (!el) continue;
-      var suffix = el.getAttribute('data-suffix') || '';
-      var shown = v >= 1e6 ? Math.round(v / 1e6) + 'M' : v.toLocaleString('en-US');
+      if (!el) return;
       el.setAttribute('data-count', v);
-      el.textContent = shown + suffix;
-    }
-  }).catch(function(){ /* offline o file assente: restano i valori dell'HTML */ });
+      el.textContent = (v >= 1e6 ? Math.round(v / 1e6) + 'M' : v.toLocaleString('en-US'))
+                       + (el.getAttribute('data-suffix') || '');
+    });
+  }
+
+  function animate(){
+    els.forEach(function(el){
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      if (isNaN(target)) return;
+      var suffix = el.getAttribute('data-suffix') || '';
+      var final = el.textContent;                 // letto ADESSO, cioe' dopo la sincronizzazione
+      if (reduce) return;
+      var dur = 1200, t0 = null;
+      function step(ts){
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        var n = Math.floor(target * (1 - Math.pow(1 - p, 3)));
+        el.textContent = (target >= 1e6 ? Math.round(n / 1e6) + 'M' : n.toLocaleString('en-US')) + suffix;
+        if (p < 1) requestAnimationFrame(step); else el.textContent = final;
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  var started = false;
+  function go(){ if (!started) { started = true; animate(); } }
+  setTimeout(go, 1500);                            // una fetch lenta non trattiene il contatore
+  fetch('collection.json', {cache: 'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(apply)
+    .catch(function(){ /* offline o file assente: restano i valori dell'HTML */ })
+    .then(go);
 })();
 </script>
 </body></html>
