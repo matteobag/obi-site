@@ -78,28 +78,6 @@ nav a:hover{color:var(--ink);border-color:#b9b8b2}nav a.on{color:#fff;border-col
 .wc .t{font:700 17px/1.3 Archivo,sans-serif;color:var(--ink);letter-spacing:-.3px;margin:0 0 7px}
 .wc p{font-size:14px;line-height:1.62;color:var(--mut);margin:0;max-width:34em}
 
-/* workforce */
-.wfx{margin:0}
-.wfx h3{font:700 31px/1.15 Archivo,sans-serif;letter-spacing:-1.05px;color:var(--ink);margin:0 0 15px;max-width:840px}
-.wfx>p{font-size:16px;line-height:1.68;color:#44453f;margin:0;max-width:36em}
-.wfx>p b{color:var(--ink);font-weight:600}
-.wfn{display:flex;gap:12px;align-items:flex-start;background:var(--pan);border:1px solid var(--bd2);border-radius:6px;padding:14px 16px;margin:22px 0 0;font-size:13px;line-height:1.6;color:#4c4d47}
-.wfn b{color:var(--ink);font-weight:600}
-.wfn s{flex:0 0 auto;font:600 9.5px/1 Inter,sans-serif;letter-spacing:1px;text-transform:uppercase;color:var(--mut);border:1px solid var(--bd2);background:var(--bg);border-radius:3px;padding:6px 8px;text-decoration:none;margin-top:1px}
-.wfg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0 0}
-.wfc{background:var(--pan);border:1px solid var(--bd);border-radius:8px;padding:22px 24px 22px;display:flex;flex-direction:column}
-.wfc .nm{font:600 10.5px/1 Inter,sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:var(--ac)}
-.wfc h4{font:700 19px/1.3 Archivo,sans-serif;color:var(--ink);letter-spacing:-.4px;margin:11px 0 11px}
-.wfc p{font-size:13.5px;line-height:1.62;color:#4c4d47;margin:0 0 16px;flex:1}
-.wfc .bo{font-size:12px;line-height:1.55;color:var(--mut);border-top:1px solid var(--bd);padding-top:12px;margin-bottom:13px}
-.wfc .bo a{color:var(--ac);text-decoration:none;font-weight:600}.wfc .bo a:hover{text-decoration:underline}
-.wfc .st{font:600 10px/1 Inter,sans-serif;letter-spacing:.7px;text-transform:uppercase;border:1px solid var(--bd2);color:var(--mut);background:#f7f6f3;border-radius:4px;padding:5px 8px;align-self:flex-start}
-.wfc .st.now{border-color:var(--ac);color:var(--ac);background:#fff}
-
-.wfb{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--pan);border:1px solid var(--bd);border-radius:8px;padding:20px 24px;margin:16px 0 0}
-.wfb b{font:700 19px/1.3 Archivo,sans-serif;color:var(--ink);letter-spacing:-.4px}
-.wfb .btn{padding:13px 22px}
-
 /* CTA */
 .cta{background:var(--ink);color:#fff;border-radius:8px;padding:40px;margin:64px 0 0}
 .cta h3{font:700 31px/1.18 Archivo,sans-serif;letter-spacing:-1.05px;margin:0 0 13px;color:#fff;max-width:none}
@@ -114,7 +92,7 @@ nav a:hover{color:var(--ink);border-color:#b9b8b2}nav a.on{color:#fff;border-col
 .limits b{color:var(--ink);font-weight:600}
 footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
 
-@media(max-width:1060px){.stk{grid-template-columns:repeat(2,1fr);gap:24px}}@media(max-width:560px){.stk{grid-template-columns:1fr;gap:20px}.why{grid-template-columns:1fr;gap:22px}}@media(max-width:900px){.qs,.wfg{grid-template-columns:1fr}.why{grid-template-columns:repeat(2,1fr);gap:24px}.wf{grid-template-columns:1fr;gap:20px}}
+@media(max-width:1060px){.stk{grid-template-columns:repeat(2,1fr);gap:24px}}@media(max-width:560px){.stk{grid-template-columns:1fr;gap:20px}.why{grid-template-columns:1fr;gap:22px}}@media(max-width:900px){.qs{grid-template-columns:1fr}.why{grid-template-columns:repeat(2,1fr);gap:24px}.wf{grid-template-columns:1fr;gap:20px}}
 @media(max-width:860px){
   .ctr{grid-template-columns:repeat(2,1fr)}
   .ct:nth-child(2n){border-right:none}
@@ -129,7 +107,6 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
   .tax{font-size:14.5px}
   .wf{padding:22px}.wf h4{font-size:20px}
   .cta{padding:26px 22px}.cta h3{font-size:23px}
-  .wfx h3{font-size:24px;letter-spacing:-.7px}.wfc h4{font-size:18px}.wfb b{font-size:17px}.wfb .btn{width:100%;text-align:center}
   nav{margin-left:0;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;gap:6px;padding-bottom:4px;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav a{flex:0 0 auto;white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;font-size:12.5px}
 }
 @media(max-width:520px){
@@ -146,6 +123,7 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
   <a href="international.html">Skill demand index</a>
   <a href="exposure.html">AI exposure engine</a>
   <a href="ratings-preview.html">Programme rating</a>
+  <a href="workforce.html">Workforce</a>
   <a href="methodology.html">Methodology &amp; data</a>
  </nav>
 </div></header>
@@ -228,7 +206,7 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
    </div>
   </a>
 
-  <a class=q href="#workforce">
+  <a class=q href="workforce.html">
    <div class=prev><svg viewBox="0 0 480 120" width="100%%" height="120" preserveAspectRatio="xMidYMid meet" style="display:block"><rect x="8.2" y="8.0" width="45.8" height="112.0" fill="#9aa09b"/><rect x="67.8" y="26.1" width="45.8" height="93.9" fill="#9aa09b"/><rect x="127.5" y="44.2" width="45.8" height="75.8" fill="#9aa09b"/><rect x="187.2" y="12.5" width="45.8" height="107.5" fill="none" stroke="#e4022b" stroke-width="1.8"/><rect x="246.9" y="53.2" width="45.8" height="66.8" fill="#9aa09b"/><rect x="306.6" y="21.6" width="45.8" height="98.4" fill="none" stroke="#e4022b" stroke-width="1.8"/><rect x="366.4" y="62.3" width="45.8" height="57.7" fill="#9aa09b"/><rect x="426.0" y="35.1" width="45.8" height="84.9" fill="none" stroke="#e4022b" stroke-width="1.8"/></svg></div>
    <div class=in>
     <span class=nm>HR &amp; workforce</span>
@@ -241,63 +219,7 @@ footer{padding:20px 0 44px;color:var(--mut);font-size:12px}
   </a>
  </div>
 
-<div class=eyebrow id="workforce">For HR &amp; workforce teams</div>
- <section class=wfx>
-  <h3>Are you hiring &mdash; and training &mdash; for the right skills?</h3>
-  <p>Every hire and every training budget is a years-long bet on a skill, and nobody prices that bet. The requisition
-  closes, the person is good, and eighteen months later the capability you were competing for is standard issue. The
-  market says all of this in the open, every week, in postings nobody reads at scale. <b>We read them.</b></p>
-
-  <div class=wfn><s>Work in progress</s><div>Pilots, not products. We run them on your material and show you the
-  output.</div></div>
-
-  <div class=wfg>
-
-   <div class=wfc>
-    <span class=nm>Role &amp; market read</span>
-    <h4>Are you hiring for the right skills?</h4>
-    <p>Send us your role families. You get them back as the market writes them now: what has become standard, what is
-    scarce and worth paying for, and where your requirements sit outside the pool you are hiring from.</p>
-    <div class=bo>Runs on ESCO plus the technologies ESCO has never named.</div>
-    <span class=st>Pilot &mdash; 4 to 8 weeks</span>
-   </div>
-
-   <div class=wfc>
-    <span class=nm>AI exposure by role</span>
-    <h4>How much of that work is still work for a person?</h4>
-    <p>Per role family: what today&rsquo;s AI can already do on its own, what it can only assist with. Capability, not
-    adoption &mdash; it shows where training pays off, not who to cut.</p>
-    <div class=bo>Live on 93 occupations &mdash; <a href="exposure.html">open the preview</a>.</div>
-    <span class="st now">Engine running</span>
-   </div>
-
-   <div class=wfc>
-    <span class=nm>Academy &amp; training spend</span>
-    <h4>Are you developing the right ones?</h4>
-    <p>The courses you run or buy, measured against real demand and against automation. What comes back is the ranked
-    list of what is missing &mdash; an order of work, not a score.</p>
-    <div class=bo>Same engine as the <a href="ratings-preview.html">programme ratings</a> &mdash; 499 rated so far.</div>
-    <span class="st now">Engine running</span>
-   </div>
-
-   <div class=wfc>
-    <span class=nm>Skill demand feed</span>
-    <h4>Would you know when the answer changes?</h4>
-    <p>Share of postings by skill and occupation in your market, week after week, versioned and frozen &mdash; a file
-    or an endpoint, not another dashboard to log into.</p>
-    <div class=bo>Opens market by market, as each one clears our coverage bar.</div>
-    <span class=st>With the first market</span>
-   </div>
-
-  </div>
-
-  <div class=wfb>
-   <b>Pick one and we&rsquo;ll run it on your own roles.</b>
-   <a class=btn href="mailto:matteo.bagnato@unlocked-advisors.com?subject=OBI%20%E2%80%94%20workforce%20pilot">Book a pilot</a>
-  </div>
- </section>
-
- <div class=eyebrow>Why it's different</div>
+<div class=eyebrow>Why it's different</div>
  <div class=why>
   <div class=wc><div class=t>Weekly, not annual</div><p>The labour market changes every week. The reports about it appear once a year, and describe a market that has already moved.</p></div>
   <div class=wc><div class=t>Nobody pays to be rated</div><p>We're not owned by a training provider, a job board or a recruiter, and the rating itself is never for sale.</p></div>
