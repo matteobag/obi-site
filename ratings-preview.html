@@ -21,7 +21,11 @@ nav a{text-decoration:none;border:1px solid var(--bd2);color:var(--mut);padding:
 nav a:hover{color:var(--ink);border-color:#b9b8b2}nav a.on{color:#fff;border-color:var(--ac);background:var(--ac)}
 
 .top{padding:44px 0 0}
-.top h2{font:800 40px/1.12 Archivo,sans-serif;letter-spacing:-1.4px;margin:0;max-width:860px;color:var(--ink)}
+.top h2{font:800 40px/1.12 Archivo,sans-serif;letter-spacing:-1.4px;margin:0;max-width:900px;color:var(--ink);text-wrap:balance}
+
+.herolink{display:inline-block;font:600 13.5px/1 Inter,sans-serif;color:var(--ac);text-decoration:none;border-bottom:1px solid rgba(228,2,43,.35);padding-bottom:3px;margin:2px 0 10px}.herolink:hover{border-bottom-color:var(--ac)}
+.ctabox{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center;background:var(--ink);border-radius:8px;padding:24px 26px;margin:20px 0 6px;max-width:940px}.ctabox b{display:block;font:700 18px/1.3 Archivo,sans-serif;color:#fff;letter-spacing:-.4px;margin-bottom:6px}.ctabox span{display:block;font:400 13.5px/1.6 Inter,sans-serif;color:#b8b7b2;letter-spacing:0}.ctabox a{display:inline-block;background:var(--ac);color:#fff;text-decoration:none;font:600 13.5px/1 Inter,sans-serif;padding:14px 22px;border-radius:4px;white-space:nowrap}.ctabox a:hover{background:#c40125}@media(max-width:700px){.ctabox{grid-template-columns:1fr}.ctabox a{text-align:center}}
+.herocta{display:inline-flex;align-items:center;gap:9px;background:var(--ac);color:#fff;text-decoration:none;font:600 13.5px/1 Inter,sans-serif;padding:13px 22px;border-radius:4px;margin:2px 0 6px}.herocta:hover{background:#c40125}.heroeye{font:600 10.5px/1 Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut);margin:0 0 12px}
 .top h2 b{color:var(--ac);font-weight:800}
 .top p{font-size:16.5px;line-height:1.62;color:#44453f;margin:18px 0 0;max-width:760px}
 .top p b{color:var(--ink);font-weight:600}
@@ -76,7 +80,7 @@ footer{padding:20px 0 44px;color:#8a8a84;font-size:11px}
   <a href="index.html">Overview</a>
   <a href="international.html">Skill demand index</a>
   <a href="exposure.html">AI exposure engine</a>
-  <a href="ratings-preview.html" class="on">Program rating</a>
+  <a href="ratings-preview.html" class="on">Programme rating</a>
   <a href="workforce.html">Workforce</a>
   <a href="methodology.html">Methodology &amp; data</a>
  </nav>
@@ -85,10 +89,12 @@ footer{padding:20px 0 44px;color:#8a8a84;font-size:11px}
 <div class=w>
 
  <section class=top>
-  <h2>Skills mismatch — <b>measured</b>.</h2>
+  <div class=heroeye>Education &amp; training programme rating</div>
+  <h2>What a programme teaches, against market demand and against <b>today&rsquo;s AI</b>.</h2>
   <p>What a rating contains: where a programme sits against what the market is actually buying, how much of what it
   teaches AI can already do, and what it would take to close the gap. Below is a <b>real rating and a real market</b> —
-  499 education and training programmes — with every name removed.</p>
+  education and training programmes — with every name removed.</p>
+  <a class=herolink href="mailto:matteo.bagnato@unlocked-advisors.com?subject=OBI%20%E2%80%94%20early%20access">Get early access &rarr;</a>
   <div class=redact><b>Names are withheld by design.</b> We publish the method and the distribution, never the names:
   a provider sees its own rating and its own gap list first. Programmes appear as <i>Programme NNN</i> and institutions
   as <i>Institution NN</i>; the pseudonyms are stable, so the portfolio view below is a true grouping — only the
@@ -137,15 +143,10 @@ footer{padding:20px 0 44px;color:#8a8a84;font-size:11px}
   </div>
  </div>
 
- <div class=cta>
-  <h3>Send us a curriculum and we'll rate it.</h3>
-  <p>Syllabus, curriculum or course outline — university degree or workforce training programme. You get the rating,
-  the drivers behind it and the gap list, before anyone else sees it.</p>
-  <a class=btn href="mailto:matteo.bagnato@unlocked-advisors.com?subject=OBI%20%E2%80%94%20rate%20our%20program">Request a rating</a>
- </div>
+ <div class=ctabox style="margin:56px 0 0;max-width:none"><div><b>See how your programmes rate.</b><span>Degrees, professional courses, corporate academies, a whole catalogue: measured against market demand and against today&rsquo;s AI, with the gap list that comes with the rating — yours to see first.</span></div><a href="mailto:matteo.bagnato@unlocked-advisors.com?subject=OBI%20%E2%80%94%20early%20access">Get early access</a></div>
 
  <div class=limits>
-  <b>What this is.</b> A 2026 proof of concept on a partial sample: 499 French programmes, tech occupations, built
+  <b>What this is.</b> A 2026 proof of concept on a partial sample of programmes, tech occupations, built
   from public programme descriptions. Ratings are <b>directional</b> — the signal is the band and the gap list, not
   the decimal. AI exposure is <b>projected capability, not observed adoption</b>: it maps the risk zone, it does not
   predict the outcome. Programmes with too little evidence are left unrated rather than assumed safe.
