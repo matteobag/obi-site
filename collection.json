@@ -3,8 +3,8 @@
  "markets": 15,
  "sources": 10000,
  "daily": 900000,
- "postings_exact": 17358100,
+ "postings_exact": 17361349,
  "rate_per_sec": 10.6556,
- "measured_at": 1789251421,
- "generated_at": "2026-09-12T22:00:01+00:00"
+ "measured_at": 1789255021,
+ "generated_at": "2026-09-12T23:00:01+00:00"
 }
