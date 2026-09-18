@@ -1,10 +1,10 @@
 {
- "postings": 17000000,
+ "postings": 20000000,
  "markets": 15,
  "sources": 10000,
- "daily": 750000,
- "postings_exact": 17590659,
- "rate_per_sec": 8.8208,
- "measured_at": 1789355821,
- "generated_at": "2026-09-14T03:00:01+00:00"
+ "daily": 600000,
+ "postings_exact": 20620583,
+ "rate_per_sec": 7.013,
+ "measured_at": 1789721954,
+ "generated_at": "2026-09-18T08:45:01+00:00"
 }
